@@ -1,0 +1,47 @@
+title: |-
+  Abort if no changes
+summary: |
+  Abort the build if no changes in specified directories since previous commit and build is triggered automatically.
+description: |
+  This step cancels current build via Bitrise API if files were not changed in the specified directory between last two commits and build was triggered automatically.
+website: https://github.com/orestesgaolin/bitrise-step-bitrise-abort-if-no-changes
+source_code_url: https://github.com/orestesgaolin/bitrise-step-bitrise-abort-if-no-changes
+support_url: https://github.com/orestesgaolin/bitrise-step-bitrise-abort-if-no-changes/issues
+source:
+  git: https://github.com/orestesgaolin/bitrise-step-bitrise-abort-if-no-changes.git
+  commit: 282f2f7153dbd41da82aa9a3375260417d2a4404
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+
+type_tags:
+  - utility
+
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: true
+run_if: ""
+
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+  - name: curl
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+  - dir_name:
+    opts:
+      title: "Exact or part of directory name that should be checked for changes since previous commit"
+      is_expand: true
+      is_required: true
+  - bitrise_access_token:
+    opts:
+      title: "Bitrise access token to execute API queries"
+      summary: "See more here https://devcenter.bitrise.io/getting-started/account-security/#generating-personal-access-tokens-manually"
+      is_expand: true
+      is_required: true
